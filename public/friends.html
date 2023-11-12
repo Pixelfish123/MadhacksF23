@@ -3,10 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>Centsible</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -31,16 +29,32 @@
 
     <!-- Custom -->
     <link href="css/mystyles.css" rel="stylesheet">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.6.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.6.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-performance-compat.js"></script>
+    <!-- 
+                  initialize the SDK after all desired features are loaded, set useEmulator to false
+                  to avoid connecting the SDK to running emulators.
+                -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+        <div class="row align-items-center bg-light py-3 px-xl-6 d-none d-lg-flex">
             <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Centsible</span>
-                </a>
+                <img src="./img/logobanner.png" alt="" style="width: 30%;">
             </div>
             <div class="col-lg-8 text-right">
                 <p class="m-0">Profile</p>
@@ -109,20 +123,17 @@
                     <div class="card-body bg-light">
                         <div class="row align-items-center">
                             <!-- Friend Name -->
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <h5 class="card-title">Friend Name</h5>
                             </div>
 
                             <!-- Email and Phone Number -->
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <p class="card-text">roro@gmail.com</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="card-text">7206168809</p>
                             </div>
 
                             <!-- Add Button -->
-                            <div class="col-md-1 d-flex justify-content-end">
+                            <div class="col-md-2 d-flex justify-content-end">
                                 <button id="addButton" class="btn btn-primary" onclick="addUser()">Add</button>
                             </div>
                         </div>
@@ -133,62 +144,8 @@
         </div>
 
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- Content for the first column -->
-                    <div class="product-item mb-3">
-                        <div class="bg-light card-body">
-                            <h5 class="card-title">Friend Name</h5>
-                            <div class="container row">
-                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
-                                <p class="row-4 card-text px-3">7206168809</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Content for the second column -->
-                    <div class="product-item mb-3">
-                        <div class="bg-light card-body">
-                            <h5 class="card-title">Friend Name</h5>
-                            <div class="container row">
-                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
-                                <p class="row-4 card-text px-3">7206168809</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- Content for the first column -->
-                    <div class="product-item mb-3">
-                        <div class="bg-light card-body">
-                            <h5 class="card-title">Friend Name</h5>
-                            <div class="container row">
-                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
-                                <p class="row-4 card-text px-3">7206168809</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Content for the second column -->
-                    <div class="product-item mb-3">
-                        <div class="bg-light card-body">
-                            <h5 class="card-title">Friend Name</h5>
-                            <div class="container row">
-                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
-                                <p class="row-4 card-text px-3">7206168809</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="container mt-5" id="friendsList">
         </div>
-    </div>
     </div>
     <!-- Shop End -->
 
@@ -207,28 +164,6 @@
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
-
-
-    <script>
-        function showInfoCard() {
-            var inputVal = document.getElementById('searchInput').value;
-            var infoCard = document.getElementById('infoCard');
-            if (inputVal.length > 0) {
-                infoCard.style.display = 'block';
-                infoCard.getElementsByClassName('card-text')[0].textContent = 'Info for: ' + inputVal;
-            } else {
-                infoCard.style.display = 'none';
-            }
-        }
-
-        function addUser() {
-            var inputVal = document.getElementById('searchInput').value;
-            // Add functionality here
-            alert('Add user: ' + inputVal);
-            // After adding the user, you might want to clear the input or take other actions
-        }
-    </script>
-
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

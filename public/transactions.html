@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>Centsible</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Google Web Fonts -->
@@ -26,30 +26,34 @@
 
     <!-- Custom -->
     <link href="css/mystyles.css" rel="stylesheet">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.6.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.6.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/10.6.0/firebase-performance-compat.js"></script>
+    <!-- 
+                  initialize the SDK after all desired features are loaded, set useEmulator to false
+                  to avoid connecting the SDK to running emulators.
+                -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+        <div class="row align-items-center bg-light py-3 px-xl-6 d-none d-lg-flex">
             <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Centsible</span>
-                </a>
+                <img src="./img/logobanner.png" alt="" style="width: 30%;">
             </div>
-            <div class="col-lg-4 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for Transactions">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-4 col-6 text-right">
+            <div class="col-lg-8 text-right">
                 <p class="m-0">Profile</p>
                 <h5 class="m-0 color-change-div" id="profileName"></h5>
             </div>
