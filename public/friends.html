@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MultiShop - Online Shop Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+    <!-- Remix Icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom -->
+    <link href="css/mystyles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="" class="text-decoration-none">
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">Centsible</span>
+                </a>
+            </div>
+            <div class="col-lg-8 text-right">
+                <p class="m-0">Profile</p>
+                <h5 class="m-0 color-change-div" id="profileName"></h5>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-dark mb-30">
+        <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <span class="h1 text-uppercase text-dark bg-light px-2">Centsible</span>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <!-- <a href="index.html" class="nav-item nav-link">Home</a> -->
+                        <a href="transactions.html" class="nav-item nav-link">Transactions</a>
+                        <a href="friends.html" class="nav-item nav-link active">Friends</a>
+                    </div>
+                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <a href="" class="btn px-0">
+                            <i class="fas fa-heart text-primary"></i>
+                            <span class="badge text-secondary border border-secondary rounded-circle"
+                                style="padding-bottom: 2px;">0</span>
+                        </a>
+                        <a href="" class="btn px-0 ml-3">
+                            <i class="ri-notification-2-fill text-primary"></i>
+                            <span class="badge text-secondary border border-secondary rounded-circle"
+                                style="padding-bottom: 2px;">0</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Actual shop stuff -->
+            <div class="container mb-5 text-center">
+                <h2 class="text-decoration-underline underline-heading">Friends</h2>
+            </div>
+
+            <div class="container w-50">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control" onkeyup="showInfoCard()"
+                        placeholder="Search for new friends with gmail or phone number">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-transparent text-primary">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+                <!-- Info Card Popup -->
+                <div id="infoCard" class="card mt-2" style="display: none;">
+                    <div class="card-body bg-light">
+                        <div class="row align-items-center">
+                            <!-- Friend Name -->
+                            <div class="col-md-3">
+                                <h5 class="card-title">Friend Name</h5>
+                            </div>
+
+                            <!-- Email and Phone Number -->
+                            <div class="col-md-4">
+                                <p class="card-text">roro@gmail.com</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="card-text">7206168809</p>
+                            </div>
+
+                            <!-- Add Button -->
+                            <div class="col-md-1 d-flex justify-content-end">
+                                <button id="addButton" class="btn btn-primary" onclick="addUser()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Content for the first column -->
+                    <div class="product-item mb-3">
+                        <div class="bg-light card-body">
+                            <h5 class="card-title">Friend Name</h5>
+                            <div class="container row">
+                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
+                                <p class="row-4 card-text px-3">7206168809</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Content for the second column -->
+                    <div class="product-item mb-3">
+                        <div class="bg-light card-body">
+                            <h5 class="card-title">Friend Name</h5>
+                            <div class="container row">
+                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
+                                <p class="row-4 card-text px-3">7206168809</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Content for the first column -->
+                    <div class="product-item mb-3">
+                        <div class="bg-light card-body">
+                            <h5 class="card-title">Friend Name</h5>
+                            <div class="container row">
+                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
+                                <p class="row-4 card-text px-3">7206168809</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- Content for the second column -->
+                    <div class="product-item mb-3">
+                        <div class="bg-light card-body">
+                            <h5 class="card-title">Friend Name</h5>
+                            <div class="container row">
+                                <p class="row-4 card-text pr-3">roro@gmail.com</p>
+                                <p class="row-4 card-text px-3">7206168809</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Shop End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+
+    <script>
+        function showInfoCard() {
+            var inputVal = document.getElementById('searchInput').value;
+            var infoCard = document.getElementById('infoCard');
+            if (inputVal.length > 0) {
+                infoCard.style.display = 'block';
+                infoCard.getElementsByClassName('card-text')[0].textContent = 'Info for: ' + inputVal;
+            } else {
+                infoCard.style.display = 'none';
+            }
+        }
+
+        function addUser() {
+            var inputVal = document.getElementById('searchInput').value;
+            // Add functionality here
+            alert('Add user: ' + inputVal);
+            // After adding the user, you might want to clear the input or take other actions
+        }
+    </script>
+
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="js/data.json" id="jsonData" type="application/json"></script>
+    <script src="js/friends.js"></script>
+</body>
+
+</html>

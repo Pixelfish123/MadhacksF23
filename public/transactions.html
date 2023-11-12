@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MultiShop - Online Shop Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+    <!-- Remix Icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom -->
+    <link href="css/mystyles.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="" class="text-decoration-none">
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">Centsible</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for Transactions">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 col-6 text-right">
+                <p class="m-0">Profile</p>
+                <h5 class="m-0 color-change-div" id="profileName"></h5>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-dark mb-30">
+        <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <span class="h1 text-uppercase text-dark bg-light px-2">Centsible</span>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <!-- <a href="index.html" class="nav-item nav-link">Home</a> -->
+                        <a href="transactions.html" class="nav-item nav-link active">Transactions</a>
+                        <a href="friends.html" class="nav-item nav-link">Friends</a>
+                    </div>
+                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <a href="" class="btn px-0">
+                            <i class="fas fa-heart text-primary"></i>
+                            <span class="badge text-secondary border border-secondary rounded-circle"
+                                style="padding-bottom: 2px;">0</span>
+                        </a>
+                        <a href="" class="btn px-0 ml-3">
+                            <i class="ri-notification-2-fill text-primary"></i>
+                            <span class="badge text-secondary border border-secondary rounded-circle"
+                                style="padding-bottom: 2px;">0</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!-- Actual shop stuff -->
+            <div class="container mb-5 text-center">
+                <h2 class="text-decoration-underline underline-heading">Transactions</h2>
+            </div>
+
+            <div class="col-12 mx-auto" id="receipts">
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Shop End -->
+
+
+    <!-- New Post Button -->
+    <button class="btn btn-primary floating-btn" data-toggle="modal" data-target="#shopFormModal">
+        <i class="fas fa-plus"></i> New Receipt
+    </button>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="shopFormModal" tabindex="-1" role="dialog" aria-labelledby="shopFormModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="shopFormModalLabel">Add New Receipt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form -->
+                    <form id="shopForm">
+                        <div class="form-group">
+                            <label for="shopName">Establishment Name</label>
+                            <input type="text" class="form-control" id="shopName"
+                                placeholder="Enter establishment name">
+                        </div>
+                        <div class="form-group">
+                            <label for="totalCost">Total Cost</label>
+                            <input type="number" class="form-control" id="totalCost" placeholder="Enter total cost">
+                        </div>
+                        <div class="form-group">
+                            <label for="percentage">Percentage</label>
+                            <input type="number" class="form-control" id="totalCost" placeholder="Enter percentage">
+                        </div>
+
+                        <!-- Dynamic Contributors Section -->
+                        <div class="form-group">
+                            <label>Contributors</label>
+                            <div id="contributorsContainer">
+                                <!-- Contributors will be added here dynamically -->
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="addContributor()">+ Add
+                                Contributor</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <script>
+        function addContributor() {
+            const container = document.getElementById('contributorsContainer');
+            const newContributor = document.createElement('div');
+            newContributor.className = 'row align-items-center my-2'; // Use row for alignment
+            newContributor.innerHTML = `<div class="col">
+            <input type="text" class="form-control contributor-input" placeholder="Contributor name" oninput="showSuggestions(this)" onfocusout="removeSuggestions(this)">
+            <div class="suggestions-container d-none"></div> <!-- Hidden by default -->
+        </div>
+        <div class="col">
+            <input type="number" class="form-control" placeholder="Percentage">
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-danger btn-sm" onclick="removeElement(this)">X</button>
+        </div>`;
+            container.appendChild(newContributor);
+        }
+
+        function showSuggestions(inputElement) {
+            const suggestionsContainer = inputElement.nextElementSibling;
+            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+            suggestionsContainer.classList.remove('d-none'); // Show suggestions container
+
+            // Example: Static list of suggestions (replace with your actual data)
+            const suggestions = ['John Doe', 'Jane Smith', 'Emma Johnson'];
+            suggestions.forEach(suggestion => {
+                const suggestionDiv = document.createElement('div');
+                suggestionDiv.className = 'suggestion-item';
+                suggestionDiv.innerText = suggestion;
+                suggestionDiv.onclick = () => selectContributor(inputElement, suggestion);
+                suggestionsContainer.appendChild(suggestionDiv);
+            });
+        }
+
+        function removeSuggestions(inputElement) {
+            const suggestionsContainer = inputElement.nextElementSibling;
+            suggestionsContainer.classList.add('d-none'); // Hide suggestions
+        }
+
+        function selectContributor(inputElement, name) {
+            inputElement.value = name; // Set the input value to the selected name
+            const suggestionsContainer = inputElement.nextElementSibling;
+            suggestionsContainer.classList.add('d-none'); // Hide suggestions
+        }
+
+        function removeElement(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+        function submitForm() {
+            // Add form submission logic here
+            alert('Form submitted!');
+        }
+    </script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="js/data.json" id="jsonData" type="application/json"></script>
+    <script src="js/filler.js"></script>
+</body>
+
+</html>
