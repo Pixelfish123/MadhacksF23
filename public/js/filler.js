@@ -1,6 +1,8 @@
 var currUser;
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', thing);
+
+async function thing() {
     currUser = JSON.parse(document.cookie.split("=")[1]);
     document.getElementById("profileName").innerHTML = currUser.displayName;
 
@@ -19,9 +21,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     generateReceipts(receipts);
-});
-
-
+}
 
 async function generateReceipts(data) {
     var str = "";
@@ -239,5 +239,5 @@ async function submitForm() {
     }
 
     document.getElementById("close-modal").click();
-    await generateReceipts(receipts);
+    await thing(receipts);
 }
