@@ -28,10 +28,10 @@ function generateReceipts(data) {
 
     for (let i = 0; i < data.length; i++) {
         document.getElementById(`btn${i}`).addEventListener("click", function () {
-            if (document.getElementById(`showMore${i}`).style.display == "flex")
-                document.getElementById(`showMore${i}`).style.display = "none";
+            if (document.getElementById(`showMore${i}`).hidden)
+                document.getElementById(`showMore${i}`).hidden = false;
             else
-                document.getElementById(`showMore${i}`).style.display = "flex";
+                document.getElementById(`showMore${i}`).hidden = true;
         });
     }
 }
@@ -65,7 +65,7 @@ function generateReceiptsHelper(data, i) {
                                 </div>
                             </div >
 
-                            <div class="col-12 cd-flex align-items-center justify-content-center mt-2" id="showMore${i}">
+                            <div class="col-12 cd-flex align-items-center justify-content-center mt-2" id="showMore${i}" hidden>
                                 ${generateReceiptsDetailsHelper(data, pi, i)}
                             </div>
                         </div >
