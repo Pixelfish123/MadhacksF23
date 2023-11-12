@@ -113,3 +113,131 @@ async function generateReceiptsDetailsHelper(data, pi) {
 
     return str;
 }
+
+
+
+function split() {
+    contributors = document.getElementsByClassName("percent");
+
+    var individual = Math.round(1 / (contributors.length + 1) * 100) / 100;
+
+    for (let i = 0; i < contributors.length; i++) {
+        contributors[i].value = individual;
+    }
+
+    document.getElementById("yourPercent").value = Math.round((1 - individual * contributors.length) * 100) / 100;
+}
+
+
+
+function addContributor() {
+    const container = document.getElementById('contributorsContainer');
+    const newContributor = document.createElement('div');
+    newContributor.className = 'row align-items-center my-2'; // Use row for alignment
+    newContributor.innerHTML = `<div class="col">
+            <input type="text" class="form-control contributor-input" placeholder="Contributor name" oninput="showSuggestions(this)">
+            <div class="suggestions-container d-none"></div> <!-- Hidden by default -->
+        </div>
+        <div class="col">
+            <input type="number" class="form-control percent" placeholder="Percentage">
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-danger btn-sm" onclick="removeElement(this)">X</button>
+        </div>`;
+    container.appendChild(newContributor);
+}
+
+async function showSuggestions(inputElement) {
+    const suggestionsContainer = inputElement.nextElementSibling;
+    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+    suggestionsContainer.classList.remove('d-none'); // Show suggestions container
+
+    // Example: Static list of suggestions (replace with your actual data)
+    var currUserRef = await db.collection("users").doc(currUser.uid).get();
+    friends = currUserRef.data().friends;
+
+    var suggestions = [];
+
+    for (let i = 0; i < friends.length; i++) {
+        var friendRef = await db.collection("users").doc(friends[i].id).get();
+        var friend = friendRef.data();
+        suggestions.push(`${friend.first} ${friend.last}`);
+    }
+
+    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+    suggestions.forEach(suggestion => {
+        const suggestionDiv = document.createElement('div');
+        suggestionDiv.className = 'suggestion-item';
+        suggestionDiv.innerText = suggestion;
+        suggestionDiv.onclick = () => selectContributor(inputElement, suggestion);
+        suggestionsContainer.appendChild(suggestionDiv);
+    });
+}
+
+function removeSuggestions(inputElement) {
+    const suggestionsContainer = inputElement.nextElementSibling;
+    suggestionsContainer.classList.add('d-none'); // Hide suggestions
+}
+
+function selectContributor(inputElement, name) {
+    inputElement.value = name; // Set the input value to the selected name
+    const suggestionsContainer = inputElement.nextElementSibling;
+    suggestionsContainer.classList.add('d-none'); // Hide suggestions
+}
+
+function removeElement(button) {
+    button.parentElement.parentElement.remove();
+}
+
+async function submitForm() {
+    shopName = document.getElementById("shopName").value;
+    total = document.getElementById("totalCost").value;
+    yourPercent = document.getElementById("yourPercent").value;
+
+    contributors = document.getElementsByClassName("contributor-input");
+    percentages = document.getElementsByClassName("percent");
+
+
+    var names = [currUser.displayName.split(" ")];
+    var percentageList = [yourPercent];
+    for (let i = 0; i < percentages.length; i++) {
+        names.push(contributors[i].value.split(" "));
+        percentageList.push(percentages[i].value);
+    }
+
+    var paid = [true, ...new Array(contributors.length).fill(false)];
+
+
+    references = [];
+    for (let i = 0; i < contributors.length; i++) {
+        var querySnapshot = await db.collection("users").where("first", "==", names[i][0]).where("last", "==", names[i][1]).get();
+
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            references[i] = db.collection("users").doc(doc.id);
+        });
+    }
+
+    var receipt = {
+        owner: db.collection("users").doc(currUser.uid),
+        store: shopName,
+        total: Number(total),
+        percentage: percentageList,
+        paid: paid,
+        contributors: references
+    };
+
+
+    var receiptRef = await db.collection("receipts").add(receipt);
+
+    for (let i = 0; i < references.length; i++) {
+        var userRef = await db.collection("users").doc(references[i].id).get();
+        var userData = userRef.data();
+        userData.receipts.push(db.collection("receipts").doc(receiptRef.id));
+        await db.collection("users").doc(references[i].id).update({ receipts: userData.receipts });
+    }
+
+    document.getElementById("close-modal").click();
+    await generateReceipts(receipts);
+}

@@ -146,7 +146,7 @@
                         </div>
                         <div class="form-group">
                             <label for="percentage">Percentage</label>
-                            <input type="number" class="form-control" id="totalCost" placeholder="Enter percentage">
+                            <input type="number" class="form-control" id="yourPercent" placeholder="Enter percentage">
                         </div>
 
                         <!-- Dynamic Contributors Section -->
@@ -161,7 +161,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="split()">Split</button>
                     <button type="button" class="btn btn-primary" onclick="submitForm()">Save changes</button>
                 </div>
             </div>
@@ -181,61 +182,6 @@
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
-
-    <script>
-        function addContributor() {
-            const container = document.getElementById('contributorsContainer');
-            const newContributor = document.createElement('div');
-            newContributor.className = 'row align-items-center my-2'; // Use row for alignment
-            newContributor.innerHTML = `<div class="col">
-            <input type="text" class="form-control contributor-input" placeholder="Contributor name" oninput="showSuggestions(this)" onfocusout="removeSuggestions(this)">
-            <div class="suggestions-container d-none"></div> <!-- Hidden by default -->
-        </div>
-        <div class="col">
-            <input type="number" class="form-control" placeholder="Percentage">
-        </div>
-        <div class="col-auto">
-            <button type="button" class="btn btn-danger btn-sm" onclick="removeElement(this)">X</button>
-        </div>`;
-            container.appendChild(newContributor);
-        }
-
-        function showSuggestions(inputElement) {
-            const suggestionsContainer = inputElement.nextElementSibling;
-            suggestionsContainer.innerHTML = ''; // Clear previous suggestions
-            suggestionsContainer.classList.remove('d-none'); // Show suggestions container
-
-            // Example: Static list of suggestions (replace with your actual data)
-            const suggestions = ['John Doe', 'Jane Smith', 'Emma Johnson'];
-            suggestions.forEach(suggestion => {
-                const suggestionDiv = document.createElement('div');
-                suggestionDiv.className = 'suggestion-item';
-                suggestionDiv.innerText = suggestion;
-                suggestionDiv.onclick = () => selectContributor(inputElement, suggestion);
-                suggestionsContainer.appendChild(suggestionDiv);
-            });
-        }
-
-        function removeSuggestions(inputElement) {
-            const suggestionsContainer = inputElement.nextElementSibling;
-            suggestionsContainer.classList.add('d-none'); // Hide suggestions
-        }
-
-        function selectContributor(inputElement, name) {
-            inputElement.value = name; // Set the input value to the selected name
-            const suggestionsContainer = inputElement.nextElementSibling;
-            suggestionsContainer.classList.add('d-none'); // Hide suggestions
-        }
-
-        function removeElement(button) {
-            button.parentElement.parentElement.remove();
-        }
-
-        function submitForm() {
-            // Add form submission logic here
-            alert('Form submitted!');
-        }
-    </script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
