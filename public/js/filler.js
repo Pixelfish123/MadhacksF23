@@ -210,12 +210,12 @@ async function submitForm() {
 
 
     references = [];
-    for (let i = 0; i < contributors.length; i++) {
+    for (let i = 0; i < names.length; i++) {
         var querySnapshot = await db.collection("users").where("first", "==", names[i][0]).where("last", "==", names[i][1]).get();
 
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            references[i] = db.collection("users").doc(doc.id);
+            references.push(db.collection("users").doc(doc.id));
         });
     }
 
